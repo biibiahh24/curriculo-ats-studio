@@ -1,37 +1,51 @@
-# CV Claro — gerador de currículo ATS
+# CV Claro — comparação de currículo com vaga
 
-MVP educacional para organizar informações profissionais em uma estrutura simples, legível por pessoas e por sistemas de triagem de currículos.
+Aplicação educacional para comparar uma descrição de vaga com um currículo, mostrar termos presentes e ausentes e organizar uma cópia simples para revisão. O projeto prioriza legibilidade por ATS e transparência: não inventa qualificações e não promete aprovação.
 
+- **Aplicação publicada:** https://biibiahh24.github.io/curriculo-ats-studio/
 - **Repositório:** https://github.com/biibiahh24/curriculo-ats-studio
-- **Aplicação:** https://biibiahh24.github.io/curriculo-ats-studio/
-- **Protótipo:** `index.html`
+- **Tecnologias:** HTML, CSS e JavaScript puro; sem dependências ou chaves de API.
+- **Arquivo principal:** `index.html`
 
-## Problema e público
+## Problema que resolve
 
-Quem está procurando estágio ou emprego pode perder tempo ajustando o currículo para cada vaga e usar colunas, gráficos ou elementos que atrapalham a extração automática. O CV Claro oferece uma página única com campos convencionais, prévia em texto, checklist de estrutura, download .txt e impressão/Salvar como PDF.
+Quem procura uma oportunidade precisa adaptar o currículo à vaga sem perder tempo com formatações que atrapalham a leitura automática. O CV Claro compara os dois textos no próprio navegador, aponta termos que aparecem no currículo e termos que merecem revisão, e organiza o texto atual em uma versão simples para copiar, baixar ou imprimir.
 
-## Tese do MVP
+## Prompt de especificação
 
-Se a pessoa conseguir conferir em poucos minutos se incluiu nome, contato, resumo, experiência, formação e competências, terá um currículo mais fácil de revisar e adaptar para a vaga. O MVP não pontua compatibilidade real com ATS nem garante aprovação.
+> Crie uma aplicação web responsiva em português chamada CV Claro para comparar um currículo e uma descrição de vaga. A pessoa deve poder colar os dois textos. Compare termos relevantes da vaga com o currículo, apresente uma estimativa simples de correspondência, liste os termos encontrados e os que não foram localizados, e organize uma versão do currículo para revisão, com opções de copiar, baixar em TXT e imprimir/salvar em PDF. Use um visual claro, acessível, responsivo e com hierarquia tipográfica. Não invente experiência, formação, resultados ou competências. Não inclua automaticamente termos ausentes: mostre-os apenas como sugestões para a pessoa conferir. Avise que a pontuação é uma estimativa do protótipo, não a nota de um ATS real. Mantenha os textos localmente na página, sem servidor, login, analytics ou chamadas externas. Use títulos convencionais e conteúdo em texto simples.
 
-**Métrica de validação:** testar com 5 estudantes; observar se conseguem preencher e exportar um currículo sem ajuda e perguntar se a checklist foi útil.
+## Como a análise funciona
 
-## Prompt de construção
+1. A pessoa cola a descrição da oportunidade e seu currículo.
+2. O protótipo normaliza maiúsculas e acentos e extrai termos de pelo menos três caracteres, removendo palavras muito comuns.
+3. A lista prioriza os termos mais repetidos na vaga e compara sua presença no currículo.
+4. A estimativa é a proporção de termos considerados que aparecem no texto. O resultado também separa termos encontrados e não localizados.
+5. A versão para revisão preserva o currículo colado e acrescenta somente uma lista de termos que já estavam presentes no texto. Os termos ausentes não são inseridos.
+6. A pessoa revisa tudo antes de copiar, baixar como TXT ou imprimir/salvar em PDF.
 
-> Crie um editor de currículo responsivo em português chamado CV Claro. Inclua campos para nome, contato e links, resumo profissional, experiências, formação e competências. Mostre uma prévia limpa com títulos convencionais, atualizada enquanto a pessoa escreve. Acrescente checklist de campos preenchidos, exportação de texto simples e impressão para PDF. Não use tabelas, colunas, gráficos, imagens, ícones no currículo ou pontuação inventada de ATS. Não invente fatos profissionais; use placeholders claros. Mantenha todos os dados apenas na página aberta e avise que o produto não garante aprovação em sistemas de triagem. Garanta rótulos acessíveis, teclado e layout adaptável a celular.
+## Evolução e ajustes
+
+A primeira versão era um editor de currículo com campos separados, prévia e checklist de preenchimento. Ao comparar essa ideia com o desafio, ficou claro que ela não atendia ao fluxo principal pedido: analisar uma vaga junto com o currículo.
+
+A versão final foi reorganizada para receber os dois textos e mostrar a comparação antes de gerar a cópia para revisão. Também foram acrescentados exportação, impressão, limpeza dos campos e avisos explícitos sobre privacidade e limites da pontuação. A saída mantém o conteúdo original para evitar alterações ou fatos inventados.
 
 ## Decisões e limites
 
-- A estrutura prioriza texto simples e seções convencionais.
-- A checklist conta campos preenchidos, não mede qualidade nem compatibilidade com um ATS específico.
-- Os dados não são salvos em servidor; ao fechar a página, o conteúdo desaparece.
-- O usuário deve adaptar palavras-chave à vaga sem incluir habilidades que não possui.
-- O MVP não inclui login, upload de currículo existente ou geração automática com IA.
+- A comparação é textual e não reproduz os critérios de um sistema ATS comercial.
+- Termos podem ter sinônimos, variações de escrita ou significados diferentes que a análise simples não reconhece.
+- A pontuação não prevê entrevista, classificação ou contratação.
+- Os dados não são enviados a um servidor e desaparecem quando a página é fechada.
+- Termos ausentes devem ser incluídos somente se corresponderem à experiência real da pessoa.
+- O projeto não oferece upload de arquivo, login, armazenamento, integração com IA ou garantia de aprovação.
 
-## Reflexão
+## Como usar localmente
 
-Um gerador pode ajudar a organizar informações, mas não deve inventar experiência nem prometer que um currículo passará por qualquer filtro. A prévia e a exportação são simples de usar; testes com estudantes e leitura de arquivos exportados por diferentes sistemas são os próximos passos para validar a hipótese.
+Abra `index.html` em um navegador moderno. Não é necessário instalar dependências. Na aplicação publicada, cole os textos, clique em **Analisar compatibilidade** e revise a saída antes de usar.
 
-## Executar
+## Próximos passos possíveis
 
-Abra `index.html` em um navegador moderno. Para salvar em PDF, use **Imprimir / salvar PDF**.
+- reconhecer sinônimos e expressões compostas em português;
+- permitir importar DOCX/PDF com consentimento e processamento local;
+- adicionar testes com pessoas candidatas e comparar a extração em diferentes ATS;
+- oferecer exportação DOCX preservando a ordem de leitura.
